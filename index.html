@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>おやすみろぐいん</title>
+<link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background-image: url('images/background_day.png');
+  background-repeat: repeat-y;           /* 縦方向に繰り返す */
+  background-size: auto 110vh;           /* 横は原寸、縦は画面高さに合わせる */
+  background-position: top center;       /* 上中央に配置 */
+  background-attachment: scroll;         /* スクロールに合わせて動く */
+      background-color: #fceeff;
+      font-family: 'Helvetica', sans-serif;
+      text-align: center;
+      overflow-x: hidden;
+      transition: background-image 0.5s ease;
+      font-family: 'M PLUS Rounded 1c', sans-serif;
+    }
+/* ハンバーガーアイコン */
+.hamburger {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 32px;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+/* メニューのスタイル */
+.menu {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 60%;
+  height: 100vh;
+  background-color: #fff8ff;
+  box-shadow: -2px 0 5px rgba(0,0,0,0.2);
+  transition: right 0.3s ease;
+  z-index: 999;
+  padding: 50px 20px;
+  text-align: left;
+}
+
+.menu ul {
+  list-style: none;
+  padding: 0;
+}
+
+.menu li {
+  margin: 20px 0;
+}
+
+.menu a {
+  text-decoration: none;
+  font-size: 18px;
+  color: #110d3e;
+}
+
+/* メニューが開いたとき */
+.menu.open {
+  right: 0;
+}
+
+    
+
+    header {
+      margin: 20px 0;
+    }
+
+    .title-logo {
+      display: block;
+      margin: 0 auto;
+      height: 550px;
+      object-fit: contain;
+      transition: all 0.3s ease;
+    }
+
+    .logo-layout {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  max-width: 90%;
+  margin: 30px auto;
+  padding: 20px;
+  justify-items: center;
+  margin-bottom: 20vh;
+}
+
+
+    .animal-logo {
+  width: 100%;       
+  max-width: 250px;
+  height: auto;
+  object-fit: contain;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+
+    @media (max-width: 600px) {
+      .animal-logo {
+        width: 90px;
+        height: 90px;
+      }
+
+      .title-logo {
+        height: 20vh;
+      }
+
+      .logo-layout {
+        gap: 15px;
+        margin-bottom: 300vh;
+      }
+    }
+  　.animal-logo.dimmed {
+      opacity: 0.4!important;
+      filter: grayscale(50%);
+      transition: all 0.3s ease;
+    }
+@keyframes shake {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(3deg); }
+  50% { transform: rotate(0deg); }
+  75% { transform: rotate(-3deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.shake {
+  animation: shake 0.6s ease infinite;
+}
+.info-links {
+  padding: 40px 20px;
+  text-align: left;
+  max-width: 800px;
+  margin: 0 auto;
+  border-top: 2px solid #e0cfea;
+}
+
+.info-links h2 {
+  font-size: 60px;
+  color: #1a0e39;
+  margin-bottom: 20px;
+}
+
+.info-links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.info-links li {
+  margin-bottom: 15px;
+}
+
+.info-links a {
+  font-size: 32px;
+  color: #2b187c;
+  text-decoration: none;
+}
+
+.info-links a:hover {
+  text-decoration: underline;
+}
+
+ここからどの動物にする？のところ
+.tips-section {
+  background: transparent;
+  padding: 40px 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: "Hiragino Kaku Gothic ProN", "Helvetica", sans-serif;
+  text-align: left;
+  line-height: 1.8;
+  margin-top: 150vh; /* 画面の高さより下に押し出す */
+}
+
+.tips-heading {
+  font-size: 36px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.tips-intro,
+.tips-end {
+  font-size: 24px;
+  color: #20123d;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.animal-tip {
+  margin-bottom: 25px;
+  background: rgba(255, 255, 255, 0.3);
+  padding: 15px 20px;
+  border-radius: 12px;
+}
+
+.animal-tip h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #1c1a43;
+}
+
+.animal-tip p {
+  margin: 0;
+  font-size: 15px;
+  color: #351d5d;
+}
+
+
+
+  </style>
+</head>
+
+<body>
+  <header>
+    <img src="images/logo_title_awake.png" alt="タイトルロゴ" id="main-title" class="title-logo">
+  </header>
+
+  <main>
+    <div class="logo-layout">
+      <img src="images/owl_awake.png" alt="フクロウ" class="animal-logo" data-animal="owl">
+      <img src="images/sheep_awake.png" alt="羊" class="animal-logo" data-animal="sheep">
+      <img src="images/frog_awake.png" alt="カエル" class="animal-logo" data-animal="frog">
+      <img src="images/bird_awake.png" alt="キビタキ" class="animal-logo" data-animal="bird">
+      <img src="images/dolphin_awake.png" alt="イルカ" class="animal-logo" data-animal="dolphin">
+    </div>
+  </main>
+ <section class="tips-section">
+  <h2 class="tips-heading">あなたはどの動物にする？</h2>
+  <p class="tips-intro">
+    「なんとなく寝つけない夜」「モヤモヤが頭から離れない日」<br>
+    そんな時、自分の気分に合った音を選んでみませんか？
+  </p>
+
+  <div class="animal-tip">
+    <h3>フクロウ：考えごとで眠れない夜もある♩</h3>
+    <p>静かな夜、頭の中が忙しいあなたに　落ち着いた音で、心のノイズを静かに。</p>
+  </div>
+
+  <div class="animal-tip">
+    <h3>羊：やさしく眠気を誘いたいときもある♩</h3>
+    <p>ふわふわと夢の中へ。定番の羊でリラックス。死の儀式にぴったり</p>
+  </div>
+
+  <div class="animal-tip">
+    <h3>カエル：雨音に包まれて沈みたい時もある♩</h3>
+    <p>外の世界をシャットアウトしたい夜。雨のリズムに合わせて心をととのえる</p>
+  </div>
+
+  <div class="animal-tip">
+    <h3>キビタキ：朝が不安で眠れないときもある♩</h3>
+    <p>明るい明日を信じたくなる音。自然のやさしさが背中をそっと押してくれる</p>
+  </div>
+
+  <div class="animal-tip">
+    <h3>イルカ：疲れた身体をまるごと包みたいときもある♩</h3>
+    <p>海の中に浮かんでいるような安心感。1日頑張ったら、浮いてみよう♩</p>
+  </div>
+
+  <p class="tips-end">あなたの眠りを心地よいものに、する
+  </p>
+
+ 
+</section>
+ 
+<section class="info-links">
+    <h2>おやすみろぐいん</h2>
+    <ul>
+      <li><a href="#">グッズ購入はこちら</a></li>
+      <li><a href="#">睡眠のコツ</a></li>
+      <li><a href="#">ロゴについて</a></li>
+    </ul>
+  </section>
+  <script src="script.js"></script>
+</body>
+</html>
